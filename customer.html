@@ -1,0 +1,87 @@
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <link rel="stylesheet" href="css/customer.css">
+    <title>Customer</title>
+
+</head>
+    <body>
+        <div class="knockout-customer" id="knockout-customer">
+            <div class="add">
+                <button class='btn' data-bind='click: openModal'>Add New Customer</button>
+            </div>
+            <table style="width:100%" class="tbl">
+                <tr>
+                    <th class="white" data-bind="click: sortName, enable: customersArray().length > 1">Name
+                        <i data-bind="visible: (sorting() != 'nameAsc') && (sorting() != 'nameDesc')" class="fas fa-sort"></i>
+                        <i data-bind="visible: sorting() == 'nameAsc'" class="fas fa-caret-up"></i>
+                        <i data-bind="visible: sorting() == 'nameDesc' " class="fas fa-caret-down"></i>
+                    </th>
+                    <th class="white" data-bind="click: sortEmail, enable: customersArray().length > 1">Email
+                        <i data-bind="visible: (sorting() != 'emailAsc') && (sorting() != 'emailDesc') " class="fas fa-sort"></i>
+                        <i data-bind="visible: sorting() == 'emailAsc'" class="fas fa-caret-up"></i>
+                        <i data-bind="visible: sorting() == 'emailDesc'" class="fas fa-caret-down"></i>
+                    </th>
+                    <th class="white" data-bind="click: sortPassword, enable: customersArray().length > 1">Password
+                        <i data-bind="visible: (sorting() != 'passwordAsc') && (sorting() != 'passwordDesc') " class="fas fa-sort"></i>
+                        <i data-bind="visible: sorting() == 'passwordAsc'" class="fas fa-caret-up"></i>
+                        <i data-bind="visible: sorting() == 'passwordDesc'" class="fas fa-caret-down"></i>
+                    </th>
+                    <th class="white" data-bind="click: sortAddress, enable: customersArray().length > 1">Address
+                        <i data-bind="visible: (sorting() != 'addressAsc') && (sorting() != 'addressDesc') " class="fas fa-sort"></i>
+                        <i data-bind="visible: sorting() == 'addressAsc'" class="fas fa-caret-up"></i>
+                        <i data-bind="visible: sorting() == 'addressDesc'" class="fas fa-caret-down"></i>
+                    </th>
+                </tr>
+                <tbody data-bind='foreach: sortedTasks'>  <!-- customersArray -->
+                    <tr>
+                        <td data-bind='text: name'></td>
+                        <td data-bind='text: email'></td>
+                        <td data-bind='text: password'></td>
+                        <td data-bind='text: address'></td>
+                    </tr>
+                </tbody>
+                </div>
+            </table>
+            <!-- Modal -->
+            <div class="modal" data-bind="style: {display: modal}">
+                <div class="modal-content">
+                    <div class="close" data-bind="click: openModal">+</div>
+
+                    <form data-bind='submit: addCustomer'>
+                        <div class="box">
+                            <span>Customer Form</span>
+                            <div class='text-left'>
+                                <input type='text' placeholder='Name' data-bind='value: name'/>
+                                <span class="error" data-bind="visible: name.minLengthError, text: name.minLengthErrorMessage"></span>
+                            </div>
+                            <div>
+                                <input type='text' placeholder='Email' data-bind='value: email'/>
+                                <span class="error" data-bind="visible: email.minLengthError, text: email.minLengthErrorMessage"></span>
+                                <br>
+                                <span class="error" data-bind="visible: email.emailError, text: email.emailErrorMessage"></span>
+                            </div>
+                            <div>
+                                <input type='text' placeholder='Password' data-bind='value: password'/>
+                                <span class="error" data-bind="visible: password.minLengthError, text: password.minLengthErrorMessage"></span>
+                            </div>
+                            <div>
+                                <input type='text' placeholder='Address' data-bind='value: address'/>
+                                <span class="error" data-bind="visible: address.minLengthError, text: address.minLengthErrorMessage"></span>
+                            </div>
+                            <!-- To apo katw den einai comment. einai knockout syntax boreis adi na kaneis data bind na kaneis to apo katw -->
+                            <!-- ko if: canAdd -->
+                            <button type='Submit' class='btn'>Submit</button>
+                            <!-- /ko -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script type='text/javascript' src='js/knockout.js'></script>
+        <script src="js/customer.js"></script>
+    </body>
+</html>
